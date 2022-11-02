@@ -1,0 +1,8 @@
+POST http://localhost:6001/event/add
+Content-Type: application/json
+
+{
+  "title":"کامرون-برزیل",
+  "startDateTime":"1667048780939",
+  "endDateTime":"1667048780990"
+}
