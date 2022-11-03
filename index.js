@@ -49,6 +49,24 @@ app.post('/event/add',
         }
 );
 
+app.get('/event/getAll',
+    async (req, res) => 
+        {
+            try
+            {
+                const eventList = await eventServices.getAllEvent();
+                const result = {
+                    eventList: eventList
+                };
+                sendResult(res, result);
+            }
+        catch (error)
+            {
+                processError(res,error);
+            }
+        }
+)
+
 
 
 function sendResult

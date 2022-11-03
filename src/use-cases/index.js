@@ -1,5 +1,5 @@
 const buildAddEvent = require('./add-event');
-// const buildGetAllEventByUser = require('./get-all-event-by-user');
+const buildGetAllEvent = require('./get-all-event');
 
 module.exports = function(
     {
@@ -18,13 +18,13 @@ module.exports = function(
         );
 
         const addEvent = buildAddEvent(dataAccess);
-        // const getAllEventByUser = buildGetAllEventByUser(dataAccess);
+        const getAllEvent = buildGetAllEvent(dataAccess);
         
 
         const services =  Object.freeze(
             {
                 addEvent,
-                // getAllEventByUser
+                getAllEvent
             }
         );
 
