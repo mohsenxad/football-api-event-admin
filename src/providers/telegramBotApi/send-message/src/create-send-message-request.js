@@ -14,7 +14,7 @@ module.exports = function buildCreateSendMessageRequest
                     "content-type":"application/json"
                 };
         
-                const body1 = JSON.stringify(
+                const body = JSON.stringify(
                     {
                         chat_id: chat_id,
                         text: text,
@@ -22,12 +22,6 @@ module.exports = function buildCreateSendMessageRequest
                     }
                 )
 
-                const body = 
-                    {
-                        chat_id: chat_id,
-                        text: text,
-                        //reply_markup: reply_markup
-                    }
                 
         
                 var options= {
