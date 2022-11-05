@@ -22,7 +22,7 @@ module.exports  = function
             proxyAgent = new HttpsProxyAgent(proxyUrl);
         }
 
-
+        
         const { addEvent } = require('./event/add-event')
         (
             APPID,
@@ -39,10 +39,21 @@ module.exports  = function
             fetch
         )
 
+        const { getEventById } = require('./event/get-event-by-id')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        )
+
+        
+
         return Object.freeze(
             {
                 addEvent,
-                getAllEvent
+                getAllEvent,
+                getEventById
             }
         );
 

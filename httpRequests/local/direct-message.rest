@@ -1,0 +1,8 @@
+POST https://api.telegram.org/bot5540323758:AAFLJz4OKzagHvqIS4EX2fnvkEeKhkFRAVE/sendMessage
+
+Content-Type: application/json
+
+{
+  "chat_id":"@QatarWoldCup",
+  "text":"Event is جام جهانی 2022"
+}
