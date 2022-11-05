@@ -1,0 +1,6 @@
+POST http://localhost:6001/event/postOnTelegram
+Content-Type: application/json
+
+{
+  "eventId":"635d2fd1911e0aa78488d4c0"
+}

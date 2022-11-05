@@ -49,7 +49,69 @@ app.post('/event/add',
         }
 );
 
+app.get('/event/getAll',
+    async (req, res) => 
+        {
+            try
+            {
+                const eventList = await eventServices.getAllEvent();
+                const result = {
+                    eventList: eventList
+                };
+                sendResult(res, result);
+            }
+        catch (error)
+            {
+                processError(res,error);
+            }
+        }
+)
 
+
+app.post('/event/postOnTelegram',
+    async (req,res) => 
+        {
+            try 
+                {
+                    const eventId = req.body.eventId;
+                    if(
+                        eventId
+                    )
+                        {
+                            const postEventResult = await eventServices.postEvetOnTelegramChannel(
+                                eventId
+                            );
+                
+                            const result = {
+                                postEventResult:postEventResult 
+                            };
+                
+                            console.log(result);
+                            sendResult(
+                                res,
+                                result
+                            );
+                        }
+                    else
+                        {
+                            const InvalidParametersError = new Error("Invalid Parameters");
+                            processError(
+                                res,
+                                InvalidParametersError
+                            );
+                        }   
+                }
+            catch (error) 
+                {
+                    processError(
+                        res,
+                        error
+                    );
+                }
+            
+
+        }
+)
 
 function sendResult
 (

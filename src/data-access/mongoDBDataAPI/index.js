@@ -22,7 +22,7 @@ module.exports  = function
             proxyAgent = new HttpsProxyAgent(proxyUrl);
         }
 
-
+        
         const { addEvent } = require('./event/add-event')
         (
             APPID,
@@ -31,18 +31,29 @@ module.exports  = function
             fetch
         );
 
-        // const { getAllEventByUser } = require('./event/get-all-event-by-user')
-        // (
-        //     APPID,
-        //     APIKEY,
-        //     proxyAgent,
-        //     fetch
-        // )
+        const { getAllEvent } = require('./event/get-all-event')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        )
+
+        const { getEventById } = require('./event/get-event-by-id')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        )
+
+        
 
         return Object.freeze(
             {
                 addEvent,
-                // getAllEventByUser
+                getAllEvent,
+                getEventById
             }
         );
 

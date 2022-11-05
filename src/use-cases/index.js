@@ -1,12 +1,17 @@
 const buildAddEvent = require('./add-event');
-// const buildGetAllEventByUser = require('./get-all-event-by-user');
+const buildGetAllEvent = require('./get-all-event');
+const buildPostEvetOnTelegramChannel = require('./post-evet-on-telegram-channel');
 
 module.exports = function(
     {
         MONGODB_DATAAPI_APPID,
         MONGODB_DATAAPI_APIKEY
     },
-    proxyUrl
+    proxyUrl,
+    {
+        CHALNNEL_ID,
+        BOT_TOKEN
+    }
 )
     {
         const dataAccess = require('../data-access')(
@@ -17,14 +22,23 @@ module.exports = function(
             proxyUrl
         );
 
+        const providerServices = require('../providers')(
+            BOT_TOKEN
+        )
+
         const addEvent = buildAddEvent(dataAccess);
-        // const getAllEventByUser = buildGetAllEventByUser(dataAccess);
-        
+        const getAllEvent = buildGetAllEvent(dataAccess);
+        const postEvetOnTelegramChannel = buildPostEvetOnTelegramChannel(
+            dataAccess,
+            providerServices,
+            CHALNNEL_ID
+        );
 
         const services =  Object.freeze(
             {
                 addEvent,
-                // getAllEventByUser
+                getAllEvent,
+                postEvetOnTelegramChannel
             }
         );
 
