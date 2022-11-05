@@ -17,15 +17,24 @@ module.exports = function buildPostEvetOnTelegramChannel
                 console.log(event);
 
                 const message = `Event is ${event.title}`
-                const postToChannelResponse = await providerServices.telegramBot.sendMessage(
+                // const postToChannelMessageId = await providerServices.telegramBot.sendMessage(
+                //     CHALNNEL_ID,
+                //     message,
+                //     {}
+                // )
+
+                const postToChannelMessageId = await providerServices.telegramBot.sendPhoto(
                     CHALNNEL_ID,
+                    'https://cdn.fecharge.ir/tdlte.jpg',
                     message,
                     {}
                 )
 
-                console.log(postToChannelResponse);
+                // save channelPostMessageId to database
 
-                return postToChannelResponse;
+                console.log(postToChannelMessageId);
+
+                return postToChannelMessageId;
 
             }
     }

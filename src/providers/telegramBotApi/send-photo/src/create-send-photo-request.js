@@ -1,12 +1,13 @@
-module.exports = function buildCreateSendMessageRequest
+module.exports = function buildCreateSendPhotoRequest
 (
     proxyAgent
 )
     {
-        return function createSendMessageRequest
+        return function createSendPhotoRequest
         (
             chat_id,
-            text,
+            photo,
+            caption,
             reply_markup
         )
             {
@@ -17,7 +18,8 @@ module.exports = function buildCreateSendMessageRequest
                 const body = JSON.stringify(
                     {
                         chat_id: chat_id,
-                        text: text,
+                        photo:photo,
+                        caption: caption,
                         //reply_markup: reply_markup
                     }
                 )

@@ -14,9 +14,17 @@ module.exports = function(
             fetch 
         );
 
+        
+        const { sendPhoto }  = require('./send-photo')(
+            BOT_TOKEN,
+            proxyAgent,
+            fetch 
+        );
+
         const services = Object.freeze(
             {
-                sendMessage
+                sendMessage,
+                sendPhoto
             }
         )
 

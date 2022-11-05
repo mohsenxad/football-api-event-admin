@@ -1,7 +1,7 @@
-module.exports = function buildTranslateSendMessageResponse
+module.exports = function buildTranslateSendPhotoResponse
 ()
     {
-        return function translateSendMessageResponse
+        return function translateSendPhotoResponse
         (
             response
         )
