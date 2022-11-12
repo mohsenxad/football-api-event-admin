@@ -6,6 +6,7 @@ module.exports = function buildTranslateAddEventResponse
             response
         )
             {
+                console.log(response);
                 return response.insertedId;
             }
     }

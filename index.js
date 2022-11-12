@@ -10,7 +10,8 @@ app.use(bodyParser.json())
 app.use(function(req, res, next) 
     {
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, token, deviceid");
+        res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, token, eventid");
         next();
     }
 );
@@ -34,8 +35,10 @@ app.post('/event/add',
         {
             try
                 {
-                    const eventInfo = req.body;
-                    const eventId = await eventServices.addEvent(eventInfo);
+                    const eventInfo = req.body.event;
+                    const eventId = await eventServices.addEvent(
+                        eventInfo
+                    );
                     const result = {
                         eventId: eventId
                     };
@@ -64,6 +67,110 @@ app.get('/event/getAll',
             {
                 processError(res,error);
             }
+        }
+)
+
+app.get('/event/get',
+    async (req, res) => 
+        {
+            try
+            {
+                const eventId = req.headers.eventid;
+
+                const event = await eventServices.getEventById(
+                    eventId
+                );
+
+                const result = {
+                    event: event
+                };
+
+                sendResult(
+                    res,
+                    result
+                );
+            }
+        catch (error)
+            {
+                processError(
+                    res,
+                    error
+                );
+            }
+        }
+)
+
+app.delete('/event/delete',
+    async (req, res) => 
+        {
+            try 
+                {
+                    const eventId = req.headers.eventid;
+                    const deleteResult = await eventServices.deleteEventById(
+                        eventId
+                    )
+
+                    const result = {
+                        deleteResult: deleteResult
+                    };
+    
+                    sendResult(
+                        res,
+                        result
+                    );
+                }
+            catch (error)
+                {
+                    
+                }
+        }
+)
+
+app.post('/event/update',
+    async (req,res) => 
+        {
+            try 
+                {
+                    const eventId = req.body.eventId;
+                    const eventInfo = req.body.event
+                    if(
+                        eventId,
+                        eventInfo
+                    )
+                        {
+                            const updateEventResult = await eventServices.updateEvent(
+                                eventId,
+                                eventInfo
+                            );
+                
+                            const result = {
+                                updateEventResult:updateEventResult 
+                            };
+                
+                            console.log(result);
+                            sendResult(
+                                res,
+                                result
+                            );
+                        }
+                    else
+                        {
+                            const InvalidParametersError = new Error("Invalid Parameters");
+                            processError(
+                                res,
+                                InvalidParametersError
+                            );
+                        }   
+                }
+            catch (error) 
+                {
+                    processError(
+                        res,
+                        error
+                    );
+                }
+            
+
         }
 )
 

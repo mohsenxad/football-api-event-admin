@@ -6,10 +6,14 @@ module.exports = function builMakeEvent
             {
                 registerDate = Date.now(),
                 title,
+                description,
                 startDateTime,
                 endDateTime,
                 isActive = false,
-                tagList
+                tagList,
+                channelMessageId,
+                telegramGroupId,
+                telegramGroupInviteLink,
             }
         )
             {
@@ -30,10 +34,14 @@ module.exports = function builMakeEvent
                     {
                         getRegisterDate: () => registerDate,
                         getTitle: () => title,
+                        getDescription: () => description,
                         getStartDateTime: () => startDateTime,
                         getEndDateTime: () => endDateTime,
                         getIsActive: () => isActive,
                         getTagList: () => tagList,
+                        getChannelMessageId: ()=> channelMessageId,
+                        getTelegramGroupId: () => telegramGroupId,
+                        getTelegramGroupInviteLink: () => telegramGroupInviteLink,
                         toBson: toBson,
                     }
                 );
@@ -46,6 +54,7 @@ module.exports = function builMakeEvent
                                 }
                         },
                         title: title,
+                        description: description,
                         startDateTime : {
                             "$date": {
                                 "$numberLong": startDateTime.toString()
@@ -56,7 +65,10 @@ module.exports = function builMakeEvent
                                 "$numberLong": endDateTime.toString()
                                 }
                         },
-                        isActive: isActive
+                        isActive: isActive,
+                        channelMessageId:channelMessageId,
+                        telegramGroupId: telegramGroupId,
+                        telegramGroupInviteLink: telegramGroupInviteLink,
                     }
                 }
 

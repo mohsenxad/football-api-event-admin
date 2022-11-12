@@ -31,15 +31,27 @@ module.exports  = function
             fetch
         );
 
-        const { getAllEvent } = require('./event/get-all-event')
+        const { updateEvent } = require('./event/update-event')
         (
             APPID,
             APIKEY,
             proxyAgent,
             fetch
-        )
+        );
 
-        const { getEventById } = require('./event/get-event-by-id')
+        
+        const { deleteEventById } = require('./event/delete-event-by-id')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        );
+
+
+        
+
+        const { getAllEvent } = require('./event/get-all-event')
         (
             APPID,
             APIKEY,
@@ -49,11 +61,33 @@ module.exports  = function
 
         
 
+        
+
+        const { getEventById } = require('./event/get-event-by-id')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        )
+
+        const { setEventChannelMessageId } = require('./event/set-event-channel-message-id')
+        (
+            APPID,
+            APIKEY,
+            proxyAgent,
+            fetch
+        )
+        
+
         return Object.freeze(
             {
                 addEvent,
+                updateEvent,
+                deleteEventById,
                 getAllEvent,
-                getEventById
+                getEventById,
+                setEventChannelMessageId
             }
         );
 

@@ -7,7 +7,8 @@ const eventServices = require('./use-cases')(
     {
         CHALNNEL_ID :process.env.CHALNNEL_ID,
         BOT_TOKEN :process.env.BOT_TOKEN
-    }
+    },
+    process.env.FOOBTALL_STORAGE_URL
 );
 
 module.exports = eventServices;

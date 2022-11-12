@@ -2,7 +2,8 @@ module.exports = function buildPostEvetOnTelegramChannel
 (
     dataAccess,
     providerServices,
-    CHALNNEL_ID
+    CHALNNEL_ID,
+    FOOBTALL_STORAGE_URL
 )
     {
         return async function postEvetOnTelegramChannel
@@ -16,7 +17,11 @@ module.exports = function buildPostEvetOnTelegramChannel
 
                 console.log(event);
 
-                const message = `Event is ${event.title}`
+                const message = `
+                    ${event.description}\n\n
+                    برای مشاهده ی چالش ها وارد لینک زیر بشید👇 \n
+                    ${event.telegramGroupInviteLink}
+                `;
                 // const postToChannelMessageId = await providerServices.telegramBot.sendMessage(
                 //     CHALNNEL_ID,
                 //     message,
@@ -25,16 +30,19 @@ module.exports = function buildPostEvetOnTelegramChannel
 
                 const postToChannelMessageId = await providerServices.telegramBot.sendPhoto(
                     CHALNNEL_ID,
-                    'https://cdn.fecharge.ir/tdlte.jpg',
+                    `${FOOBTALL_STORAGE_URL}/event?eventId=${event._id}`,
                     message,
                     {}
                 )
 
-                // save channelPostMessageId to database
+                const setEventChannelMessageIdResult = await dataAccess.dataApi.setEventChannelMessageId(
+                    eventId,
+                    postToChannelMessageId
+                )
 
-                console.log(postToChannelMessageId);
+                console.log(setEventChannelMessageIdResult);
 
-                return postToChannelMessageId;
+                return setEventChannelMessageIdResult;
 
             }
     }

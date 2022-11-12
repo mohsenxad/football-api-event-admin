@@ -15,6 +15,8 @@ module.exports = function buildAddEvent
                     event
                 );
 
+                console.log(options);
+
         
                 const url = `https://data.mongodb-api.com/app/${APPID}/endpoint/data/v1/action/insertOne`;
                 
