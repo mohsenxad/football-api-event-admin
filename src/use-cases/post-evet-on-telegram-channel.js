@@ -16,12 +16,9 @@ module.exports = function buildPostEvetOnTelegramChannel
                 );
 
                 console.log(event);
-
-                const message = `
-                    ${event.description}\n\n
-                    برای مشاهده ی چالش ها وارد لینک زیر بشید👇 \n
-                    ${event.telegramGroupInviteLink}
-                `;
+                
+                const howToMessage = `با ورود به گروه چالش ها، میتوانید در چالش های لحظه ای شرکت کنید و امتیاز بیشتری برای شرکت در قرعه کشی دریافت کنید.`
+                const message = `${event.description}\n\n♨️برای مشاهده ی چالش ها وارد لینک زیر بشید👇\n${event.telegramGroupInviteLink}\n\n ${howToMessage}`;
                 // const postToChannelMessageId = await providerServices.telegramBot.sendMessage(
                 //     CHALNNEL_ID,
                 //     message,
@@ -30,7 +27,7 @@ module.exports = function buildPostEvetOnTelegramChannel
 
                 const postToChannelMessageId = await providerServices.telegramBot.sendPhoto(
                     CHALNNEL_ID,
-                    `${FOOBTALL_STORAGE_URL}/event?eventId=${event._id}`,
+                    `${FOOBTALL_STORAGE_URL}/event?eventId=${event._id}&t=${Date.now()}`,
                     message,
                     {}
                 )
